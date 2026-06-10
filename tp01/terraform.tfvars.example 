@@ -1,0 +1,20 @@
+# Exemple de fichier de variables pour le projet TP01
+# Copiez ce fichier en terraform.tfvars et adaptez les valeurs selon vos besoins
+
+# Nom du projet
+project = "tp01"
+
+# Environnement de déploiement (dev, staging, prod)
+environment = "dev"
+
+# Propriétaire du projet
+owner = "isaie-dns"
+
+# Tags supplémentaires à appliquer aux ressources
+tags = {
+  Project     = "tp01"
+  Environment = "dev"
+  ManagedBy   = "terraform"
+  Team        = "formation"
+  CostCenter  = "education"
+}

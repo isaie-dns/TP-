@@ -1,87 +1,148 @@
-# main.tf
+#main.tf
 
-# -----------------------------------------------------------------------------
-# Contexte AWS et randomisation du nom
-# -----------------------------------------------------------------------------
-data "aws_caller_identity" "current" {}
-
-resource "random_pet" "suffix" {
-  length    = 2
-  separator = "-"
+# VPC
+resource "aws_vpc" "main" {
+  cidr_block           = var.vpc_cidr
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+  tags = {
+    Name = "${local.name_prefix}-vpc"
+  }
 }
 
-locals {
-  bucket_name = "${var.bucket_prefix}-${data.aws_caller_identity.current.account_id}-${random_pet.suffix.id}"
-}
-
-# -----------------------------------------------------------------------------
-# Bucket S3 principal
-# -----------------------------------------------------------------------------
-resource "aws_s3_bucket" "main" {
-  bucket = local.bucket_name
+#Internal Gateway
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
 
   tags = {
-    Owner = var.owner
-    Name  = local.bucket_name
+    Name = "${local.name_prefix}-igw"
   }
 }
 
-resource "aws_s3_bucket_versioning" "main" {
-  bucket = aws_s3_bucket.main.id
+#publioc subnet
+resource "aws_subnet" "public" {
+  for_each = local.public_subnets
 
-  versioning_configuration {
-    status = "Enabled"
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = each.value
+  availability_zone       = each.key
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "${local.name_prefix}-public-${each.key}"
+    Tier = "public"
+  }
+}
+#private subnet
+resource "aws_subnet" "private" {
+  for_each = local.private_subnets
+
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = each.value
+  availability_zone = each.key
+
+
+  tags = {
+    Name = "${local.name_prefix}-public-${each.key}"
+    Tier = "private"
   }
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "main" {
-  bucket = aws_s3_bucket.main.id
+resource "aws_eip" "nat" {
+  domain = "vpc"
 
-  rule {
-    apply_server_side_encryption_by_default {
-      sse_algorithm = "AES256"
-    }
+  tags = {
+    Name = "${local.name_prefix}-nat-eip"
+  }
+
+  depends_on = [aws_internet_gateway.main]
+}
+
+#nat gateway
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public[var.azs[0]].id
+
+  tags = {
+    Name = "${local.name_prefix}-nat"
+  }
+
+  depends_on = [aws_internet_gateway.main]
+}
+
+
+# Route table publique : 0.0.0.0/0 -> IGW
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.main.id
+  }
+  tags = {
+    Name = "${local.name_prefix}-private-rt"
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "main" {
-  bucket = aws_s3_bucket.main.id
+# Route table privee : 0.0.0.0/0 -> NAT
 
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.main.id
 
-}
-
-data "aws_iam_policy_document" "force_tls" {
-  statement {
-    sid    = "DenyInsecureTransport"
-    effect = "Deny"
-
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
-
-    actions = ["s3:*"]
-
-    resources = [
-      aws_s3_bucket.main.arn,
-      "${aws_s3_bucket.main.arn}/*"
-    ]
-
-    condition {
-      test     = "Bool"
-      variable = "aws:SecureTransport"
-      values   = ["false"]
-    }
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.main.id
+  }
+  tags = {
+    Name = "${local.name_prefix}-private-rt"
+    
   }
 }
-resource "aws_s3_bucket_policy" "main" {
-  bucket = aws_s3_bucket.main.id
-  policy = data.aws_iam_policy_document.force_tls.json
 
-  # La policy doit etre appliquee apres le public access block,
-  depends_on = [aws_s3_bucket_public_access_block.main]
+# Associations route table - subnet
+resource "aws_route_table_association" "public" {
+
+  for_each = aws_subnet.public
+
+  subnet_id      = each.value.id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "private" {
+
+  for_each = aws_subnet.private
+
+  subnet_id      = each.value.id
+  route_table_id = aws_route_table.private.id
+}
+
+
+# Security Group : bastion SSH
+resource "aws_security_group" "bastion" {
+  vpc_id      = aws_vpc.main.id
+  name        = "${local.name_prefix}-bastion-sg"
+  description = "SSH bastion"
+  tags = {
+    Name = "${local.name_prefix}-bastion-sg"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "bastion_ssh" {
+  security_group_id = aws_security_group.bastion.id
+
+  description = "SSH depuis IP autorisee"
+  from_port   = 22
+  to_port     = 22
+  ip_protocol = "tcp"
+  cidr_ipv4   = var.bastion_allowed_cidr
+}
+
+resource "aws_vpc_security_group_egress_rule" "bastion_all" {
+  security_group_id = aws_security_group.bastion.id
+
+  description = "Egress all"
+  from_port   = -1
+  to_port     = -1
+  ip_protocol = "-1"
+  cidr_ipv4   = "0.0.0.0/0"
 }

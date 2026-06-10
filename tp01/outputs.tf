@@ -1,20 +1,30 @@
-# outputs.tf
-output "bucket_name" {
-  value       = aws_s3_bucket.main.id
-  description = "Nom du bucket S3 cree"
+#output.tf
+output "vpc_id" {
+  value       = aws_vpc.main.id
+  description = "ID du VPC"
 }
 
-output "bucket_arn" {
-  value       = aws_s3_bucket.main.arn
-  description = "ARN complet du bucket"
+output "vpc_cidr" {
+  value       = aws_vpc.main.cidr_block
+  description = "CIDR du Vpc"
 }
 
-output "bucket_region" {
-  value       = aws_s3_bucket.main.region
-  description = "Region complet du bucket"
+output "public_subnet_ids" {
+  value       = { for k, s in aws_subnet.public : k => s.id }
+  description = "Map AZ -> ID de subnet public"
 }
 
-output "versioning_status" {
-  value       = aws_s3_bucket_versioning.main.versioning_configuration[0].status
-  description = "Statut du versioning"
+output "private_subnet_ids" {
+  value       = { for k, s in aws_subnet.private : k => s.id }
+  description = "Map AZ -> ID de subnet prive"
+}
+
+output "nat_gateway_public_ip" {
+  value       = aws_eip.nat.public_ip
+  description = "IP publique du NAT Gateway"
+}
+
+output "bastion_security_group_id" {
+  value       = aws_security_group.bastion.id
+  description = "ID du Security Group bastion (a utiliser au TP03)"
 }

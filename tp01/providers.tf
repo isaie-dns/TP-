@@ -1,3 +1,4 @@
+# providers.tf
 terraform {
   required_version = ">= 1.7.0"
 
@@ -6,23 +7,20 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.6"
-    }
   }
 }
 
 provider "aws" {
-  region = "eu-west-3"
+  region = var.aws_region
 
   default_tags {
     tags = {
       Project     = "formation-terraform"
-      Module      = "tp01-s3-secure"
+      Module      = "tp02-vpc"
       ManagedBy   = "Terraform"
-      CostCenter  = "formation"
-      Environment = "dev"
+      Environment = var.environment
+      Owner = "etudiant06"
+
     }
   }
 }
