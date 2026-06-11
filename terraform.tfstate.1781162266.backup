@@ -1,0 +1,1118 @@
+{
+  "version": 4,
+  "terraform_version": "1.7.5",
+  "serial": 53,
+  "lineage": "98d34fd1-d242-e2ad-1d8e-ad439ca6f697",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "data",
+      "type": "aws_ami",
+      "name": "al2023",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "architecture": "x86_64",
+            "arn": "arn:aws:ec2:eu-west-3::image/ami-0f1c58f03cab73f2d",
+            "block_device_mappings": [
+              {
+                "device_name": "/dev/xvda",
+                "ebs": {
+                  "delete_on_termination": "true",
+                  "encrypted": "false",
+                  "iops": "3000",
+                  "snapshot_id": "snap-0152e097232a431a7",
+                  "throughput": "125",
+                  "volume_initialization_rate": "0",
+                  "volume_size": "2",
+                  "volume_type": "gp3"
+                },
+                "no_device": "",
+                "virtual_name": ""
+              }
+            ],
+            "boot_mode": "uefi-preferred",
+            "creation_date": "2026-06-04T17:32:52.000Z",
+            "deprecation_time": "2026-09-02T19:01:00.000Z",
+            "description": "Amazon Linux 2023 AMI 2023.12.20260608.0 x86_64 Minimal HVM kernel-6.18",
+            "ena_support": true,
+            "executable_users": null,
+            "filter": [
+              {
+                "name": "architecture",
+                "values": [
+                  "x86_64"
+                ]
+              },
+              {
+                "name": "name",
+                "values": [
+                  "al2023-ami-*-x86_64"
+                ]
+              },
+              {
+                "name": "state",
+                "values": [
+                  "available"
+                ]
+              }
+            ],
+            "hypervisor": "xen",
+            "id": "ami-0f1c58f03cab73f2d",
+            "image_id": "ami-0f1c58f03cab73f2d",
+            "image_location": "amazon/al2023-ami-minimal-2023.12.20260608.0-kernel-6.18-x86_64",
+            "image_owner_alias": "amazon",
+            "image_type": "machine",
+            "imds_support": "v2.0",
+            "include_deprecated": false,
+            "kernel_id": "",
+            "last_launched_time": "",
+            "most_recent": true,
+            "name": "al2023-ami-minimal-2023.12.20260608.0-kernel-6.18-x86_64",
+            "name_regex": null,
+            "owner_id": "137112412989",
+            "owners": [
+              "amazon"
+            ],
+            "platform": "",
+            "platform_details": "Linux/UNIX",
+            "product_codes": [],
+            "public": true,
+            "ramdisk_id": "",
+            "root_device_name": "/dev/xvda",
+            "root_device_type": "ebs",
+            "root_snapshot_id": "snap-0152e097232a431a7",
+            "sriov_net_support": "simple",
+            "state": "available",
+            "state_reason": {
+              "code": "UNSET",
+              "message": "UNSET"
+            },
+            "tags": {},
+            "timeouts": null,
+            "tpm_support": "",
+            "uefi_data": null,
+            "usage_operation": "RunInstances",
+            "virtualization_type": "hvm"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_eip",
+      "name": "nat",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address": null,
+            "allocation_id": "eipalloc-0ceefbeaafdb2b64d",
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:elastic-ip/eipalloc-0ceefbeaafdb2b64d",
+            "associate_with_private_ip": null,
+            "association_id": "eipassoc-0b3bf4bb37a9aefc1",
+            "carrier_ip": "",
+            "customer_owned_ip": "",
+            "customer_owned_ipv4_pool": "",
+            "domain": "vpc",
+            "id": "eipalloc-0ceefbeaafdb2b64d",
+            "instance": "",
+            "ipam_pool_id": null,
+            "network_border_group": "eu-west-3",
+            "network_interface": "eni-01ff0372ff4661ad0",
+            "private_dns": "ip-10-0-1-51.eu-west-3.compute.internal",
+            "private_ip": "10.0.1.51",
+            "ptr_record": "",
+            "public_dns": "ec2-51-45-41-213.eu-west-3.compute.amazonaws.com",
+            "public_ip": "51.45.41.213",
+            "public_ipv4_pool": "amazon",
+            "tags": {
+              "Name": "tp03-dev-nat-eip"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-nat-eip",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "timeouts": null,
+            "vpc": true
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxODAwMDAwMDAwMDAsInJlYWQiOjkwMDAwMDAwMDAwMCwidXBkYXRlIjozMDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_internet_gateway.main",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_internet_gateway",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:internet-gateway/igw-06b03ec4eddda804b",
+            "id": "igw-06b03ec4eddda804b",
+            "owner_id": "039497794217",
+            "tags": {
+              "Name": "tp03-dev-igw"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-igw",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-08cf0e105dd268667"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_key_pair",
+      "name": "formation",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:key-pair/tp03-dev-key",
+            "fingerprint": "7f:29:29:ac:8f:8d:fc:92:c1:7b:97:b1:b1:f7:61:18",
+            "id": "tp03-dev-key",
+            "key_name": "tp03-dev-key",
+            "key_name_prefix": "",
+            "key_pair_id": "key-0badf96941303b337",
+            "key_type": "rsa",
+            "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCkYNkmU3XGap7c156ApbTjcEwle3MGTRfrPA0xotQtRhA8D4rs/opgmM66+uVaSWR0M75d0JgDzmOIjXUu4XQcj211muAhhZlV+pXbL/u5pNgNH50vIZoNKK1GDAl6+X64/09P3obKpVukgah0fKJQIVuYBPhTdKItlijZqEhTF34vYOUPoYkQqBWV2SICvCjZ3KQ6umAY6OwUu4yk3WcKv4D1OgGNgr+XwgDh72ItSGuP9kP5wtQ+AiR50kgEOHqqESlUDCZwvwgbWHFSMUwuuZpFRwXoa7WxsUy1xuYehDjtO+qi9BzTmsBMCB02m3DoZObwBpxsR/w5VhamFPALAGhVG9+1GKcJpM30eoTkPonK+aBNlp9USErQt8J5NOFtkgGa8bhGyMT9kJFqDiPDgxvA6gn8rsYGyzuOK9P2syZ07aaPaXC3e2H1AAkeiABkBUJSqrtmPPN4j+Efl+bNlPpQemA1NDxsY79+Ut7Qkc4Qx4Nexg3SGLdU94AfE5asxQVOWLNLCAy87lso41udBVpqI5opL6Y40DMcujeuodMTnjXWc5CJmCmmwsMYWk5ODdBMK7H+3vmh+wZiybCpUnH/yvBoTnJp1G28DMUzNNK+j0DGq3FXZdB1STOvNLGfpRV3C4kxGe4fXU2IDrLKLP+67VTNYk43xakFjWCjXQ== i-dns@rog-arch-ID",
+            "tags": {
+              "Name": "tp03-dev-key"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-key",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_nat_gateway",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "allocation_id": "eipalloc-0ceefbeaafdb2b64d",
+            "association_id": "eipassoc-0b3bf4bb37a9aefc1",
+            "connectivity_type": "public",
+            "id": "nat-099cb8869d701a201",
+            "network_interface_id": "eni-01ff0372ff4661ad0",
+            "private_ip": "10.0.1.51",
+            "public_ip": "51.45.41.213",
+            "secondary_allocation_ids": [],
+            "secondary_private_ip_address_count": 0,
+            "secondary_private_ip_addresses": [],
+            "subnet_id": "subnet-0b97d03a9f84a9c19",
+            "tags": {
+              "Name": "tp03-dev-nat"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-nat",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwMCwidXBkYXRlIjo2MDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "private",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:route-table/rtb-04500e9e8799062df",
+            "id": "rtb-04500e9e8799062df",
+            "owner_id": "039497794217",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "nat-099cb8869d701a201",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "tp03-dev-private-rt"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-private-rt",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-08cf0e105dd268667"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:route-table/rtb-0ce1e4f8d7682c2ba",
+            "id": "rtb-0ce1e4f8d7682c2ba",
+            "owner_id": "039497794217",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "igw-06b03ec4eddda804b",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "tp03-dev-public-rt"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-public-rt",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-08cf0e105dd268667"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.main",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "private",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "eu-west-3a",
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-02b804bb7869de1a4",
+            "route_table_id": "rtb-04500e9e8799062df",
+            "subnet_id": "subnet-022f9a28cbbb08825",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_route_table.private",
+            "aws_subnet.private",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        },
+        {
+          "index_key": "eu-west-3b",
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0d26a1eba93055c19",
+            "route_table_id": "rtb-04500e9e8799062df",
+            "subnet_id": "subnet-084afe5736f25d506",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_route_table.private",
+            "aws_subnet.private",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "eu-west-3a",
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-064abe6c96b943029",
+            "route_table_id": "rtb-0ce1e4f8d7682c2ba",
+            "subnet_id": "subnet-0b97d03a9f84a9c19",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.main",
+            "aws_route_table.public",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        },
+        {
+          "index_key": "eu-west-3b",
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-067483ef9e4a3a51f",
+            "route_table_id": "rtb-0ce1e4f8d7682c2ba",
+            "subnet_id": "subnet-09e10c8d23b38dff3",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.main",
+            "aws_route_table.public",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "bastion",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:security-group/sg-098ce48df83d26fd6",
+            "description": "Allow SSH to bastion from authorized IP",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "Egress all",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-098ce48df83d26fd6",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "92.153.5.8/32"
+                ],
+                "description": "SSH depuis IP autorisee",
+                "from_port": 22,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 22
+              }
+            ],
+            "name": "tp03-dev-bastion-sg",
+            "name_prefix": "",
+            "owner_id": "039497794217",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "tp03-dev-bastion-sg"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-bastion-sg",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-08cf0e105dd268667"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "web",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:security-group/sg-0716f387f1a8779e3",
+            "description": "Allow SSH/HTTP from bastion SG only",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "Egress all (yum/nginx updates)",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-0716f387f1a8779e3",
+            "ingress": [
+              {
+                "cidr_blocks": [],
+                "description": "HTTP depuis le bastion",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-098ce48df83d26fd6"
+                ],
+                "self": false,
+                "to_port": 80
+              },
+              {
+                "cidr_blocks": [],
+                "description": "SSH depuis le bastion",
+                "from_port": 22,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-098ce48df83d26fd6"
+                ],
+                "self": false,
+                "to_port": 22
+              }
+            ],
+            "name": "tp03-dev-web-sg",
+            "name_prefix": "",
+            "owner_id": "039497794217",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "tp03-dev-web-sg"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-web-sg",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-08cf0e105dd268667"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.main"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "private",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "eu-west-3a",
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:subnet/subnet-022f9a28cbbb08825",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "eu-west-3a",
+            "availability_zone_id": "euw3-az1",
+            "cidr_block": "10.0.101.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-022f9a28cbbb08825",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "039497794217",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "tp03-dev-private-eu-west-3a",
+              "Tier": "private"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-private-eu-west-3a",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns",
+              "Tier": "private"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-08cf0e105dd268667"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ],
+          "create_before_destroy": true
+        },
+        {
+          "index_key": "eu-west-3b",
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:subnet/subnet-084afe5736f25d506",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "eu-west-3b",
+            "availability_zone_id": "euw3-az2",
+            "cidr_block": "10.0.102.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-084afe5736f25d506",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "039497794217",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "tp03-dev-private-eu-west-3b",
+              "Tier": "private"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-private-eu-west-3b",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns",
+              "Tier": "private"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-08cf0e105dd268667"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "eu-west-3a",
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:subnet/subnet-0b97d03a9f84a9c19",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "eu-west-3a",
+            "availability_zone_id": "euw3-az1",
+            "cidr_block": "10.0.1.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0b97d03a9f84a9c19",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "039497794217",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "tp03-dev-public-eu-west-3a",
+              "Tier": "public"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-public-eu-west-3a",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns",
+              "Tier": "public"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-08cf0e105dd268667"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        },
+        {
+          "index_key": "eu-west-3b",
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:subnet/subnet-09e10c8d23b38dff3",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "eu-west-3b",
+            "availability_zone_id": "euw3-az2",
+            "cidr_block": "10.0.2.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-09e10c8d23b38dff3",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "039497794217",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "tp03-dev-public-eu-west-3b",
+              "Tier": "public"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-public-eu-west-3b",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns",
+              "Tier": "public"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-08cf0e105dd268667"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:vpc/vpc-08cf0e105dd268667",
+            "assign_generated_ipv6_cidr_block": false,
+            "cidr_block": "10.0.0.0/16",
+            "default_network_acl_id": "acl-0bd7bcee752fc133c",
+            "default_route_table_id": "rtb-08ad3a845ceff62cc",
+            "default_security_group_id": "sg-09a6734940f3f49cf",
+            "dhcp_options_id": "dopt-01f1c51c68cc28274",
+            "enable_dns_hostnames": true,
+            "enable_dns_support": true,
+            "enable_network_address_usage_metrics": false,
+            "id": "vpc-08cf0e105dd268667",
+            "instance_tenancy": "default",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_association_id": "",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_network_border_group": "",
+            "ipv6_ipam_pool_id": "",
+            "ipv6_netmask_length": 0,
+            "main_route_table_id": "rtb-08ad3a845ceff62cc",
+            "owner_id": "039497794217",
+            "tags": {
+              "Name": "tp03-dev-vpc"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Name": "tp03-dev-vpc",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc_security_group_egress_rule",
+      "name": "bastion_all",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:security-group-rule/sgr-0b5109dc50abb6590",
+            "cidr_ipv4": "0.0.0.0/0",
+            "cidr_ipv6": null,
+            "description": "Egress all",
+            "from_port": -1,
+            "id": "sgr-0b5109dc50abb6590",
+            "ip_protocol": "-1",
+            "prefix_list_id": null,
+            "referenced_security_group_id": null,
+            "security_group_id": "sg-098ce48df83d26fd6",
+            "security_group_rule_id": "sgr-0b5109dc50abb6590",
+            "tags": null,
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "to_port": -1
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_security_group.bastion",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc_security_group_egress_rule",
+      "name": "web_all",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:security-group-rule/sgr-07535f3d9dad09fe6",
+            "cidr_ipv4": "0.0.0.0/0",
+            "cidr_ipv6": null,
+            "description": "Egress all (yum/nginx updates)",
+            "from_port": null,
+            "id": "sgr-07535f3d9dad09fe6",
+            "ip_protocol": "-1",
+            "prefix_list_id": null,
+            "referenced_security_group_id": null,
+            "security_group_id": "sg-0716f387f1a8779e3",
+            "security_group_rule_id": "sgr-07535f3d9dad09fe6",
+            "tags": null,
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "to_port": null
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_security_group.web",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc_security_group_ingress_rule",
+      "name": "bastion_ssh",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:security-group-rule/sgr-0b49abfa37478169a",
+            "cidr_ipv4": "92.153.5.8/32",
+            "cidr_ipv6": null,
+            "description": "SSH depuis IP autorisee",
+            "from_port": 22,
+            "id": "sgr-0b49abfa37478169a",
+            "ip_protocol": "tcp",
+            "prefix_list_id": null,
+            "referenced_security_group_id": null,
+            "security_group_id": "sg-098ce48df83d26fd6",
+            "security_group_rule_id": "sgr-0b49abfa37478169a",
+            "tags": null,
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "to_port": 22
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_security_group.bastion",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc_security_group_ingress_rule",
+      "name": "web_http",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:security-group-rule/sgr-0ff0f275c5a430891",
+            "cidr_ipv4": null,
+            "cidr_ipv6": null,
+            "description": "HTTP depuis le bastion",
+            "from_port": 80,
+            "id": "sgr-0ff0f275c5a430891",
+            "ip_protocol": "tcp",
+            "prefix_list_id": null,
+            "referenced_security_group_id": "sg-098ce48df83d26fd6",
+            "security_group_id": "sg-0716f387f1a8779e3",
+            "security_group_rule_id": "sgr-0ff0f275c5a430891",
+            "tags": null,
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "to_port": 80
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_security_group.bastion",
+            "aws_security_group.web",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc_security_group_ingress_rule",
+      "name": "web_ssh",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:eu-west-3:039497794217:security-group-rule/sgr-0e980b9dd209ae25a",
+            "cidr_ipv4": null,
+            "cidr_ipv6": null,
+            "description": "SSH depuis le bastion",
+            "from_port": 22,
+            "id": "sgr-0e980b9dd209ae25a",
+            "ip_protocol": "tcp",
+            "prefix_list_id": null,
+            "referenced_security_group_id": "sg-098ce48df83d26fd6",
+            "security_group_id": "sg-0716f387f1a8779e3",
+            "security_group_rule_id": "sgr-0e980b9dd209ae25a",
+            "tags": null,
+            "tags_all": {
+              "Environment": "dev",
+              "Etudiant": "etudiant06",
+              "ManagedBy": "isaie_dns",
+              "Module": "tp02-vpc",
+              "Owner": "etudiant06",
+              "Project": "terraform_isaie_dns"
+            },
+            "to_port": 22
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_security_group.bastion",
+            "aws_security_group.web",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": [
+    {
+      "object_kind": "var",
+      "config_addr": "var.environment",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "var.environment",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "var.vpc_cidr",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "var.vpc_cidr",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "var.azs",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "var.azs",
+          "status": "pass"
+        }
+      ]
+    }
+  ]
+}
